@@ -22,8 +22,7 @@
   "main": "./lib/passport-myusa",
   "dependencies": {
     "pkginfo": "0.2.x",
-    "passport-oauth": "0.1.x",
-    "request": "2.x"
+    "passport-oauth": "0.1.x"
   },
   "devDependencies": {
     "vows": "0.7.x"
