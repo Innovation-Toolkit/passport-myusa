@@ -3,11 +3,8 @@ var express = require('express')
   , util = require('util')
   , MyUSAStrategy = require('passport-myusa').Strategy;
 
-//var MYUSA_CLIENT_ID = process.env.MYUSA_CLIENT_ID || "--insert-myusa-client-id-here--"
-//var MYUSA_CLIENT_SECRET = process.env.MYUSA_CLIENT_SECRET || "--insert-myusa-client-secret-here--";
-
-var MYUSA_CLIENT_ID = "1hcj5qv6hbjj1mnas9771d6sl";
-var MYUSA_CLIENT_SECRET = "b23v29cvyxh5vc5ktsuqbunmr";
+var MYUSA_CLIENT_ID = process.env.MYUSA_CLIENT_ID || "--insert-myusa-client-id-here--"
+var MYUSA_CLIENT_SECRET = process.env.MYUSA_CLIENT_SECRET || "--insert-myusa-client-secret-here--";
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -31,10 +28,7 @@ passport.deserializeUser(function(obj, done) {
 //   profile), and invoke a callback with a user object.
 passport.use(new MyUSAStrategy({
     clientID: MYUSA_CLIENT_ID,
-    clientSecret: MYUSA_CLIENT_SECRET,
-    authorizationURL: 'http://172.23.195.54:3000/oauth/authorize',
-    tokenURL: 'http://172.23.195.54:3000/oauth/authorize',
-    profileURL: 'http://172.23.195.54:3000/api/profile'
+    clientSecret: MYUSA_CLIENT_SECRET
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
