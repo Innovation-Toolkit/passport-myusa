@@ -28,7 +28,8 @@ passport.deserializeUser(function(obj, done) {
 //   profile), and invoke a callback with a user object.
 passport.use(new MyUSAStrategy({
     clientID: MYUSA_CLIENT_ID,
-    clientSecret: MYUSA_CLIENT_SECRET
+    clientSecret: MYUSA_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3000/auth/myusa/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
