@@ -51,13 +51,14 @@ The fields available in the profile are defined by [Passport's Standard Profile]
 #### Authenticate Requests
 
 Use `passport.authenticate()`, specifying the `'myusa'` strategy, to
-authenticate requests.
+authenticate requests.  Set the requested scope, such as `profile`,
+in the optional parameters during the authenticate phase.
 
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
     app.get('/auth/myusa',
-      passport.authenticate('myusa'));
+      passport.authenticate('myusa', { scope: 'profile' }));
 
     app.get('/auth/myusa/callback', 
       passport.authenticate('myusa', { failureRedirect: '/login' }),
@@ -79,7 +80,7 @@ For a complete, working example, refer to the [login example](https://github.com
 
 ## Notes on MyUSA Authentication
 
-Register your application with [MyUSA](https://my.usa.gov/apps) and save your Client ID and Secret.  Select the scopes that your application requires.
+Register your application with [MyUSA](https://my.usa.gov/apps) and save your Client ID and Secret.  Select the scopes that your application requires. Valid scopes are `[profile,tasks,notifications,submit_forms]`.
 
 The user authentication URL and token exchange URL for MyUSA are `https://my.usa.gov/oauth/authenticate`
 
