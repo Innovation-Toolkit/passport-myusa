@@ -1,0 +1,35 @@
+{
+  "name": "passport-myusa",
+  "version": "0.1.0",
+  "description": "MyUSA authentication strategy for Passport.",
+  "keywords": ["passport", "myusa", "myusa.gov", "auth", "authn", "authentication", "identity"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Innovation-Toolkit/passport-myusa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Innovation-Toolkit/passport-myusa/issues"
+  },
+  "author": {
+    "name": "Joe Polastre",
+    "email": "joe@polastre.com",
+    "url": "http://www.polastre.com/"
+  },
+  "licenses": [ {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT" 
+  } ],
+  "main": "./lib/passport-myusa",
+  "dependencies": {
+    "pkginfo": "0.2.x",
+    "passport-oauth": "0.1.x",
+    "request": "2.x"
+  },
+  "devDependencies": {
+    "vows": "0.7.x"
+  },
+  "scripts": {
+    "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
+  },
+  "engines": { "node": ">= 0.8.0" }
+}

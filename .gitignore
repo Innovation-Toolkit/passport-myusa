@@ -1,0 +1,24 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+# Ignore modules, should be built using `node install`
+node_modules
+
+# Ignore editor temp files
+*~
+*#
+
+.DS_Store
+.tmp
+*.idea
