@@ -1,8 +1,6 @@
 passport-myusa
 ==============
 
-[![Build Status](https://travis-ci.org/Innovation-Toolkit/passport-myusa.png?branch=master)](https://travis-ci.org/Innovation-Toolkit/passport-myusa) [![Dependency Status](https://gemnasium.com/Innovation-Toolkit/passport-myusa.png)](https://gemnasium.com/Innovation-Toolkit/passport-myusa)
-
 [Passport](https://github.com/jaredhanson/passport) Authentication Strategy for 
 MyUSA (my.usa.gov) using the OAuth 2.0 API.
 
@@ -10,7 +8,7 @@ This module lets you authenticate using MyUSA in your Node.js applications.
 By plugging into Passport, MyUSA authentication can be easily and
 unobtrusively integrated into any application or framework that supports
 [Connect](http://www.senchalabs.org/connect/)-style middleware, including
-[Express](http://expressjs.com/) and [Sails](http://www.sailsjs.org)
+[Express](http://expressjs.com/) and [Sails](http://www.sailsjs.org).
 
 ## Install
 
@@ -32,6 +30,9 @@ The MyUSA authentication strategy authenticates users using an MyUSA
 account and OAuth 2.0 tokens.  The strategy requires a `verify` callback, which
 accepts these credentials and calls `done` providing a user, as well as
 `options` specifying a client ID, client secret, and callback URL.
+
+Note that the `callbackURL` must match **exactly** the callback registered
+for your application at [MyUSA](https://my.usa.gov/apps).
 
     passport.use(new MyUSAStrategy({
         clientID: MYUSA_CLIENT_ID,
@@ -71,27 +72,31 @@ For a complete, working example, refer to the [login example](https://github.com
 
 ## Tests
 
+[![Build Status](https://travis-ci.org/Innovation-Toolkit/passport-myusa.png?branch=master)](https://travis-ci.org/Innovation-Toolkit/passport-myusa) [![Dependency Status](https://gemnasium.com/Innovation-Toolkit/passport-myusa.png)](https://gemnasium.com/Innovation-Toolkit/passport-myusa)
+
     $ npm install --dev
     $ make test
 
 ## Notes on MyUSA Authentication
 
-The authentication and token exchange endpoints for MyUSA are `https://my.usa.gov/oauth/authenticate`
+Register your application with [MyUSA](https://my.usa.gov/apps) and save your Client ID and Secret.  Select the scopes that your application requires.
+
+The user authentication URL and token exchange URL for MyUSA are `https://my.usa.gov/oauth/authenticate`
 
 The REST API for profile information is `https://my.usa.gov/api/profile`
 
 All API calls, including GET requests, must include the `Authorization: Bearer <token>` HTTP header. MyUSA does **not** support GET requests with the authorization token specified using a query string.
 
-An example using node-oauth:
+An example using [node-oauth](https://github.com/ciaranj/node-oauth):
 
     var OAuth2 = require('oauth').OAuth2;
     var oauth = new OAuth2(CLIENT_ID, CLIENT_SECRET, '',
-      AUTHORIZATION_URL, TOKEN_URL, {});
+        AUTHORIZATION_URL, TOKEN_URL, null);
     // Use authorization headers for GET, not query string
     oauth.useAuthorizationHeaderforGET(true);
     // Make request
     oauth2.get(PROFILE_URL, ACCESS_TOKEN, function (err, body, res) {
-      // parse profile
+        // parse profile
     });
 
 ## Credits
