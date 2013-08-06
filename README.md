@@ -80,15 +80,13 @@ The authentication and token exchange endpoints for MyUSA are `https://my.usa.go
 
 The REST API for profile information is `https://my.usa.gov/api/profile`
 
-All API calls, including GET requests, must include the `Authorization: OAuth <token>` HTTP header.  Be sure to use `OAuth` as the authentication type as MyUSA does not support `Bearer` authentication.  Also, MyUSA does **not** support GET requests with the authorization token specified using a query string.
+All API calls, including GET requests, must include the `Authorization: Bearer <token>` HTTP header. MyUSA does **not** support GET requests with the authorization token specified using a query string.
 
 An example using node-oauth:
 
     var OAuth2 = require('oauth').OAuth2;
     var oauth = new OAuth2(CLIENT_ID, CLIENT_SECRET, '',
       AUTHORIZATION_URL, TOKEN_URL, {});
-    // Reset the Auth Method to 'OAuth' for MyUSA
-    oauth.setAuthMethod('OAuth');
     // Use authorization headers for GET, not query string
     oauth.useAuthorizationHeaderforGET(true);
     // Make request
