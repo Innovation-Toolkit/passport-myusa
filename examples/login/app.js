@@ -85,7 +85,7 @@ app.get('/login', function(req, res){
 //   will redirect the user back to this application at /auth/myusa/callback
 //   or whatever you specified when you registered your myusa application
 app.get('/auth/myusa',
-  passport.authenticate('myusa', {scope: 'profile'}),
+  passport.authenticate('myusa', {scope: ['profile.email']}),
   function(req, res){
     // The request will be redirected to MyUSA for authentication, so this
     // function will not be called.
