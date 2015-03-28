@@ -1,5 +1,10 @@
 var express = require('express')
   , passport = require('passport')
+  , morgan = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , methodOverride = require('method-override')
+  , session = require('express-session')
   , util = require('util')
   , MyUSAStrategy = require('passport-myusa').Strategy;
 
@@ -34,7 +39,7 @@ passport.use(new MyUSAStrategy({
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
+
       // To keep the example simple, the user's MyUSA profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the MyUSA account with a user record in your database,
@@ -49,21 +54,22 @@ passport.use(new MyUSAStrategy({
 var app = express();
 
 // configure Express
-app.configure(function() {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.logger());
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  // Initialize Passport!  Also use passport.session() middleware, to support
-  // persistent login sessions (recommended).
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(morgan('combined'));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(methodOverride());
+app.use(session({
+  secret: 'g-man cat',
+  resave: false,
+  saveUninitialized: true
+}));
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(req, res){
@@ -96,7 +102,7 @@ app.get('/auth/myusa',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/myusa/callback', 
+app.get('/auth/myusa/callback',
   passport.authenticate('myusa', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
