@@ -1,6 +1,6 @@
 {
   "name": "passport-myusa",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MyUSA authentication strategy for Passport.",
   "keywords": ["passport", "myusa", "myusa.gov", "auth", "authn", "authentication", "identity"],
   "repository": {
@@ -17,7 +17,7 @@
   },
   "licenses": [ {
     "type": "MIT",
-    "url": "http://www.opensource.org/licenses/MIT" 
+    "url": "http://www.opensource.org/licenses/MIT"
   } ],
   "main": "./lib/passport-myusa",
   "dependencies": {
@@ -30,5 +30,5 @@
   "scripts": {
     "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
   },
-  "engines": { "node": ">= 0.8.0" }
+  "engines": { "node": ">= 0.10.0" }
 }
